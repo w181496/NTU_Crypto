@@ -13,8 +13,10 @@ def sha256(content):
     Sha256.update(content)
     return Sha256.digest()
 
-r = remote('localhost', 10122)
-r2 = remote('localhost', 10122)
+#r = remote('localhost', 10122)
+#r2 = remote('localhost', 10122)
+r = remote('140.112.31.96', 10122)
+r2 = remote('140.112.31.96', 10122)
 
 r.recvuntil('You should send your ID and a random string to me:')
 r2.recvuntil('You should send your ID and a random string to me:')

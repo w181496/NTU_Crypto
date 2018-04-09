@@ -1,4 +1,8 @@
-# 4. How2Crypto
+# Homework 1
+
+1 ~ 3為手寫題
+
+## 4. How2Crypto
 
 - code4.py
 - Round 0: 直接輸出
@@ -12,31 +16,33 @@
 - `BALSN{You_Are_Crypto_Expert!!!^_^}`
 - P.S. script中的round 4、round 6有小片段要手動輸入
 
-# 5. RSA
+## 5. RSA
 
 - code5.py
-    - 直接使用sympy
+    - 使用sympy來做模逆
 - 先用factordb把n分解
 - 模逆求d
 - `e^d mod N`把flag密文還原
 - `BALSN{if_N_is_factorized_you_get_the_private_key}`
 
-# 6. OTP
+## 6. OTP
 
 - code6.sh
 - xortool直接解
+    - https://github.com/hellman/xortool
+    - git clone下來就能用惹
 - `xortool -x "otp.txt" -c 20`
     - 會直接生成明文
 - 原理：踹key長度，再踹每一位ascii去xor的結果，都要在可見字元，且以英文文章來說空格字元會非常多
 - `BALSN{NeVer_U5e_0ne_7ime_PAd_7wIcE}`
 
-# 7. Double AES
+## 7. Double AES
 
 - 所有腳本都在code7/下
 - 由2-DES的概念可以知道，使用同把key時，加解密的中間值會相同
 - 先枚舉加密和解密的所有中間值可能(各2^23種)
-    - `python m1.py > m1`
-    - `python m2.py > m2`
+    - `python3 m1.py > m1`
+    - `python3 m2.py > m2`
 - 然後再排序其內容
     - `sort m1 > m1-sorted`
     - `sort m2 > m2-sorted`
@@ -47,7 +53,7 @@
     - `python3 dec.py`
 - `BALSN{so_2DES_is_not_used_today}`
 
-# 8. Time-machine
+## 8. Time-machine
 
 - 所有腳本都在code8/下
 - 利用很久以前出來的SHA1 collision payload (兩個pdf)
@@ -56,7 +62,7 @@
 - 接著要做的就只是去找要加在尾端的字串，使得SHA1後最後六個Byte符合題目要求
 - `BALSN{P0W_1s_4_w4st3_0f_t1m3_4nd_3n3rgy}`
 
-# 9. Future Oracle
+## 9. Future Oracle
 
 - code9.py
 - Length Extension Attack
@@ -71,7 +77,7 @@
     - 前半就塞`Base64(ID||Ns||login padding)`就行
 - `BALSN{Wh4t_1f_u_cou1d_s33_th3_futur3}`
 
-# 10. Digital Saving Account
+## 10. Digital Saving Account
 
 - code10.py
 - Block size: 16

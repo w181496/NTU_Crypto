@@ -2,7 +2,8 @@ from pwn import *
 from hashlib import sha1
 import gmpy2
 
-r = remote('localhost', 10123)
+#r = remote('localhost', 10123)
+r = remote('140.112.31.96', 10123)
 
 token = 'hN3evxpaBjT8cWIFMF6T48C5gIglCF8uSndIA5HCr3nM3OF5TAioHwfUSmzFNMvmeRGVX2i+ygmgDHqolpNit2cocDS/8g0MOb2KR69EgVI='
 user = 'aaaaaaaaaa'

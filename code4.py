@@ -2,7 +2,8 @@ from pwn import *
 import sys
 import itertools
 
-r = remote('127.0.0.1', 10120)
+#r = remote('127.0.0.1', 10120)
+r = remote('140.112.31.96', 10120)
 
 
 flag = ''
