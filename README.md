@@ -4,7 +4,7 @@
 - Round 0: 直接輸出
 - Round 1: 00 -> a, 01 -> b, ...
 - Round 2: 凱薩密碼
-- Round 3:
+- Round 3: 凱薩的變形(?
 - Round 4: Substitution Cipher
 - Round 5: Transpostition Cipher
 - Round 6: 間隔分段，每段取首字串起來，剩下的再頭尾頭尾遞迴取完
