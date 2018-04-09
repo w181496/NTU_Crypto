@@ -70,3 +70,45 @@
     - 可得到`sha256(password||ID||Ns||login padding ||printflag)`的值
     - 前半就塞`Base64(ID||Ns||login padding)`就行
 - `BALSN{Wh4t_1f_u_cou1d_s33_th3_futur3}`
+
+# 10. Digital Saving Account
+
+- code10.py
+- Block size: 16
+- ECB mode下的cut and paste attack
+- 構造`login=aaaaaaaaaa|bbbbbbbbbb&role=|guest&pwd=xxxxxx|`
+    ```
+    84dd debf 1a5a 0634 fc71 6205 305e 93e3
+    ccdc e179 4c08 a81f 07d4 4a6c c534 cbe6
+    c9c9 4ff4 02f8 1ce6 1674 e4a0 e525 1ef0
+    3817 7c2b 193c 037b b94d 43ab 7874 3cd3
+    ```
+- 構造`login=aaaaaaaaaa|admin&role=guest|&pwd=bbbbbbbbbbb|`
+    ```
+    84dd debf 1a5a 0634 fc71 6205 305e 93e3
+    7911 955f 68be ca09 a00c 7aa8 9693 62b7
+    c0b9 8088 2508 5f2e 4a77 4803 91c2 af79
+    3817 7c2b 193c 037b b94d 43ab 7874 3cd3
+    ```
+- 透過上面的結果構造`login=aaaaaaaaaa|&pwd=bbbbbbbbbbb|bbbbbbbbbb&role=|admin&role=guest|`
+    ```
+    84dd debf 1a5a 0634 fc71 6205 305e 93e3
+    c0b9 8088 2508 5f2e 4a77 4803 91c2 af79
+    ccdc e179 4c08 a81f 07d4 4a6c c534 cbe6
+    7911 955f 68be ca09 a00c 7aa8 9693 62b7
+    6728 7034 bff2 0d0c 39bd 8a47 af44 8152
+    ```
+- 帳號:`aaaaaaaaaa`；密碼:`bbbbbbbbbbbbbbbbbbbbb`
+- base64 encoding string: `hN3evxpaBjT8cWIFMF6T48C5gIglCF8uSndIA5HCr3nM3OF5TAioHwfUSmzFNMvmeRGVX2i+ygmgDHqolpNit2cocDS/8g0MOb2KR69EgVI=`
+- 接著就能以`admin`登入
+- 登入後可以看到有:
+    - Transaction: 2個隨意簽章的字串
+    - Public Key: p, q, g, y
+    - FLAG: 把sig("FLAG")的r, s餵給他才會噴FLAG
+- 由於Transaction的k重複使用，我們可以透過它來還原private key!
+- `k * (s1−s2) ≡ H(m1) − H(m2) mod q`即可還原k
+- `x ≡ r^(−1) * (k * s − H(m)) mod q`知道k，即可還原private key x
+- 其中H()為`SHA1`
+- 有了private key就能直接簽`sig("FLAG")`
+- 此處我使用了`gmpy2`套件輔助模逆等運算
+- `BALSN{s3nd_m3_s0m3_b1tc01n_p13as3}`
