@@ -70,7 +70,7 @@
 - 目標：構造`sha256(password||ID||Ns||login||printflag)`
     - 他取`printflag`是從尾端取，所以可以work
 - 可以透過再開一個連線，餵Ns到Nc的地方，得到`sha256(password||ID||Ns||login)`
-- 透過hashpump再後面加上`||printflag`
+- 透過hashpump在後面加上`||printflag`
     - 這裡要踹`len(password)+2`的可能值
         - 最後踹出來是21
     - 可得到`sha256(password||ID||Ns||login padding ||printflag)`的值
